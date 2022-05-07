@@ -39,6 +39,11 @@ public class Student {
 	public void setMarks(String marks) {
 		this.marks = marks;
 	}
+
+	@Override
+	public String toString() {
+		return "Student [id=" + id + ", name=" + name + ", marks=" + marks + "]";
+	}
 	
 
 }

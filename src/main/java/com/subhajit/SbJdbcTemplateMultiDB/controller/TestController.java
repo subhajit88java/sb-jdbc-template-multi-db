@@ -46,12 +46,12 @@ public class TestController {
 	}
 	
 	@GetMapping("/ora-two-tables-insert-auto-trans")
-	public int oraTwoTablesInsertAutoTrans() throws IOException, SQLException {
+	public int oraTwoTablesInsertAutoTrans() throws Exception {
 		return service.oraTwoTablesInsertAutoTrans();
 	}
 	
 	@GetMapping("/ora-two-tables-insert-manual-trans")
-	public int oraTwoTablesInsertmanualTrans() throws IOException, SQLException {
+	public int oraTwoTablesInsertmanualTrans() {
 		return service.oraTwoTablesInsertManualTrans();
 	}
 

@@ -40,7 +40,7 @@ public class TestService {
 	}
 	
 	@Transactional("platformTransactionManagerOracle")
-	public int oraTwoTablesInsertAutoTrans() {	
+	public int oraTwoTablesInsertAutoTrans(){	
 		testDao.insert1stRecordOra();
 		testDao.insert2ndRecordOra();	
 		return 1;
