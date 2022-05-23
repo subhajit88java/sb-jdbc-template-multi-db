@@ -34,7 +34,7 @@ public class SpringBootMysqlApplication {
 	@Bean(name = "mysqldatasource")
 	@ConfigurationProperties(prefix = "mysql.datasource")
 	public DataSource mysqldatasource() throws SQLException{
-		DataSource mysqlDatasource = DataSourceBuilder.create().build();	
+		DataSource mysqlDatasource = DataSourceBuilder.create().build();
 		return mysqlDatasource;
 	}
 	
