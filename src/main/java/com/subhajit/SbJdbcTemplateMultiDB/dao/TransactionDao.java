@@ -16,7 +16,7 @@ import org.springframework.stereotype.Repository;
 
 import com.subhajit.SbJdbcTemplateMultiDB.bean.Student;
 
-@Repository
+//@Repository
 public class TransactionDao {
 
 	@Autowired

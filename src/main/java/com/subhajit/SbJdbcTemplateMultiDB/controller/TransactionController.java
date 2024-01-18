@@ -12,7 +12,7 @@ import com.subhajit.SbJdbcTemplateMultiDB.bean.Student;
 import com.subhajit.SbJdbcTemplateMultiDB.service.TransactionService;
 
 
-@RestController
+//@RestController
 public class TransactionController {
 	
 	private static final Logger LOGGER = LogManager.getLogger(TransactionController.class);

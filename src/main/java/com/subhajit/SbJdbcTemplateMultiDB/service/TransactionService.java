@@ -13,7 +13,7 @@ import com.subhajit.SbJdbcTemplateMultiDB.bean.Student;
 import com.subhajit.SbJdbcTemplateMultiDB.dao.TransactionDao;
 
 
-@Service
+//@Service
 public class TransactionService {
 	
 	@Autowired

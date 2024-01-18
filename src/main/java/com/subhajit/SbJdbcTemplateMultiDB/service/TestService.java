@@ -21,65 +21,65 @@ public class TestService {
 	@Autowired
 	private TestDao testDao;
 	
-	@Autowired
-	@Qualifier("platformTransactionManagerOracle")
-	PlatformTransactionManager platformTransactionManagerOracle;
-	
-	@Autowired
-	@Qualifier("platformTransactionManagerMysql")
-	PlatformTransactionManager platformTransactionManagerMysql;
+	/*
+	 * @Autowired
+	 * 
+	 * @Qualifier("platformTransactionManagerOracle") PlatformTransactionManager
+	 * platformTransactionManagerOracle;
+	 * 
+	 * @Autowired
+	 * 
+	 * @Qualifier("platformTransactionManagerMysql") PlatformTransactionManager
+	 * platformTransactionManagerMysql;
+	 */
 
-	
-	
-	public List<Student> fetchAllOracle() throws SQLException {
-		return testDao.fetchAllOracle();
+	@Transactional
+	public List<Student> oracleFetch() throws SQLException {
+		return testDao.oracleFetch();
 	}
 	
-	public List<Student> fetchAllMySQL() throws SQLException {
-		return testDao.fetchAllMySQL();
-	}
-	
-	@Transactional("platformTransactionManagerOracle")
-	public int oraTwoTablesInsertAutoTrans(){	
-		testDao.insert1stRecordOra();
-		testDao.insert2ndRecordOra();	
-		return 1;
-	}
-	
-	public int oraTwoTablesInsertManualTrans() {
-		TransactionDefinition def = new DefaultTransactionDefinition();
-		TransactionStatus status = platformTransactionManagerOracle.getTransaction(def);
+	@Transactional("platformTransactionManagerTest")
+	public List<Student> fetchAllOracle(String flag) throws SQLException {
+		testDao.fetchAllOracle(flag);
+		System.out.println("1 called by : " + flag + " - " + Thread.currentThread().getId());
 		try {
-			testDao.insert1stRecordOra();
-			testDao.insert2ndRecordOra();
-			platformTransactionManagerOracle.commit(status);
-		} catch (Exception e) {
-			platformTransactionManagerOracle.rollback(status);
-			System.err.println(e.getMessage());
-		}
-		return 1;
+			Thread.sleep(10000);
+		}catch(Exception e) {}
+		testDao.fetchAllOracle1(flag);	
+		System.out.println("2 called by : " + flag + " - " + Thread.currentThread().getId());
+		//testDao.fetchAllOracle2(flag);
+		//System.out.println("3 called by : " + flag);
+		return null;
 	}
 	
-	
-	@Transactional("platformTransactionManagerMysql")
-	public int mysqlTwoTablesInsertAutoTrans() {	
-		testDao.insert1stRecordMySQL();
-		testDao.insert2ndRecordMySQL();	
-		return 1;
-	}
-	
-	public int mysqlTwoTablesInsertManualTrans() {
-		TransactionDefinition def = new DefaultTransactionDefinition();
-		TransactionStatus status = platformTransactionManagerMysql.getTransaction(def);
-		try {
-			testDao.insert1stRecordMySQL();
-			testDao.insert2ndRecordMySQL();
-			platformTransactionManagerMysql.commit(status);
-		} catch (Exception e) {
-			platformTransactionManagerMysql.rollback(status);
-			System.err.println(e.getMessage());
-		}
-		return 1;
-	}
+	/*
+	 * public List<Student> fetchAllMySQL() throws SQLException { return
+	 * testDao.fetchAllMySQL(); }
+	 * 
+	 * //@Transactional("platformTransactionManagerOracle") public int
+	 * oraTwoTablesInsertAutoTrans(){ testDao.insert1stRecordOra();
+	 * testDao.insert2ndRecordOra(); return 1; }
+	 * 
+	 * public int oraTwoTablesInsertManualTrans() { TransactionDefinition def = new
+	 * DefaultTransactionDefinition(); TransactionStatus status =
+	 * platformTransactionManagerOracle.getTransaction(def); try {
+	 * testDao.insert1stRecordOra(); testDao.insert2ndRecordOra();
+	 * platformTransactionManagerOracle.commit(status); } catch (Exception e) {
+	 * platformTransactionManagerOracle.rollback(status);
+	 * System.err.println(e.getMessage()); } return 1; }
+	 * 
+	 * 
+	 * @Transactional("platformTransactionManagerMysql") public int
+	 * mysqlTwoTablesInsertAutoTrans() { testDao.insert1stRecordMySQL();
+	 * testDao.insert2ndRecordMySQL(); return 1; }
+	 * 
+	 * public int mysqlTwoTablesInsertManualTrans() { TransactionDefinition def =
+	 * new DefaultTransactionDefinition(); TransactionStatus status =
+	 * platformTransactionManagerMysql.getTransaction(def); try {
+	 * testDao.insert1stRecordMySQL(); testDao.insert2ndRecordMySQL();
+	 * platformTransactionManagerMysql.commit(status); } catch (Exception e) {
+	 * platformTransactionManagerMysql.rollback(status);
+	 * System.err.println(e.getMessage()); } return 1; }
+	 */
 	
 }
